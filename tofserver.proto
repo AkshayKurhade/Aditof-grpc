@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package payload;
+
+service TofServer {
+    rpc GetStatus(ClientRequest) returns (CamStatus) {}
+    
+    rpc InitializeCamera(ClientRequest) returns (InitStatus) {}
+
+    rpc GetFrame(ClientRequest) returns (Frame) {}
+
+}
+
+message CamStatus{
+  string status =15;
+}
+message InitStatus{
+  string status=15;
+}
+
+message ClientRequest
+{
+  string func_name = 20;  
+}
+
+message Frame
+{
+    repeated int32 array = 50 [packed=true] ;
+}
